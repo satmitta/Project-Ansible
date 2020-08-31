@@ -3,7 +3,7 @@
 - hosts: all_hosts
   become: yes
   roles:
-  - role: reboot
+  - { role: 'reboot', tags: 'reboot' }
   - { role: minimize_access, tags: 'Changes' }
   - { role: rhosts, tags: 'security'}
   - { role: apt, tags: 'security'}
