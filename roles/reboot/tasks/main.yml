@@ -1,0 +1,17 @@
+--- 
+- 
+  name: "Reboot host and wait for it to restart"
+  reboot: 
+    connect_timeout: "{{ reboot.connect_timeout }}"
+    msg: "{{ reboot.msg }}"
+    post_reboot_delay: "{{ reboot.post_reboot_delay }}"
+    pre_reboot_delay: "{{ reboot.pre_reboot_delay }}"
+    reboot_timeout: "{{ reboot.reboot_timeout }}"
+    test_command: "{{ reboot.test_command }}"
+- 
+  name: "Check the uptime after reboot"
+  register: UPTIME_POST_REBOOT
+  shell: uptime
+- 
+  debug: "msg={{UPTIME_POST_REBOOT.stdout}}"
+

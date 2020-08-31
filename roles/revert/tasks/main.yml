@@ -1,0 +1,25 @@
+---
+- name: copy file to remote host
+  copy:
+    src: /etc/hosts
+    dest: /etc/hosts_{{ ansible_date_time.date }}
+    remote_src: yes
+
+- name: Insert a line at the end of a file.
+  lineinfile:
+    path: /etc/hosts
+    line: this is a test line
+
+
+- name: rollback to orignal
+  copy:
+    src: /etc/hosts_{{ ansible_date_time.date }}
+    dest: /etc/hosts
+    remote_src: yes
+
+- name: get final contents of file
+  command: cat /etc/hosts
+  register: hosts
+  become: true
+
+- debug: "msg={{hosts.stdout}}"

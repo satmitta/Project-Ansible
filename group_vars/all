@@ -1,0 +1,26 @@
+# remove packages with known issues
+os_security_packages_clean: true
+os_security_packages_list: ['xinetd', 'inetd', 'ypserv', 'telnet-server', 'rsh-server', 'prelink']
+
+hidepid_option: '2' # allowed values: 0, 1, 2
+proc_mnt_options: 'rw,nosuid,nodev,noexec,relatime,hidepid={{ hidepid_option }}'
+os_security_users_allow: []
+
+os_shadow_perms:
+  owner: root
+  group: root
+  mode: '0600'
+
+os_passwd_perms:
+  owner: root
+  group: root
+  mode: '0644'
+
+# Reboot role
+reboot:
+  msg: "Reboot initiated by Ansible"
+  connect_timeout: 5
+  reboot_timeout: 600
+  pre_reboot_delay: 10
+  post_reboot_delay: 30
+  test_command: whoami

@@ -1,0 +1,11 @@
+---
+# This Playbook would deploy following roles.
+- hosts: all_hosts
+  become: yes
+  roles:
+  - role: reboot
+  - { role: minimize_access, tags: 'Changes' }
+  - { role: rhosts, tags: 'security'}
+  - { role: apt, tags: 'security'}
+  - { role: revert, tags: 'rollback' }
+
